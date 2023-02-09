@@ -27,22 +27,22 @@ class Example(QWidget):
         if event.key() == Qt.Key_Up:
             coord1, coord2 = self.coordinates.split(',')
             coord1, coord2 = float(coord1), float(coord2)
-            self.coordinates = str(coord1) + ',' + str(coord2 + 0.01 * abs(23 - self.scale))
+            self.coordinates = str(coord1) + ',' + str(coord2 + 800 / (2 ** self.scale))
             self.show_image()
         if event.key() == Qt.Key_Down:
             coord1, coord2 = self.coordinates.split(',')
             coord1, coord2 = float(coord1), float(coord2)
-            self.coordinates = str(coord1) + ',' + str(coord2 - 0.1 ** abs(12 - self.scale))
+            self.coordinates = str(coord1) + ',' + str(coord2 - 800 / (2 ** self.scale))
             self.show_image()
         if event.key() == Qt.Key_Left:
             coord1, coord2 = self.coordinates.split(',')
             coord1, coord2 = float(coord1), float(coord2)
-            self.coordinates = str(coord1 - 0.01 * abs(23 - self.scale)) + ',' + str(coord2)
+            self.coordinates = str(coord1 - 512 / (2 ** self.scale)) + ',' + str(coord2)
             self.show_image()
         if event.key() == Qt.Key_Right:
             coord1, coord2 = self.coordinates.split(',')
             coord1, coord2 = float(coord1), float(coord2)
-            self.coordinates = str(coord1 + 0.01 * abs(23 - self.scale)) + ',' + str(coord2)
+            self.coordinates = str(coord1 + 512 / (2 ** self.scale)) + ',' + str(coord2)
             self.show_image()
 
     def show_image(self):
