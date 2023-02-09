@@ -4,12 +4,12 @@ import requests
 
 def getImage():
     coordinates = '37.530887,55.70311'
-    spn = '0.002,0.002'
+    z = 17
 
     map_api_server = "http://static-maps.yandex.ru/1.x/"
     map_params = {
         "ll": coordinates,
-        "spn": spn,
+        "z": z,
         "l": "map"
     }
     response = requests.get(map_api_server, map_params)
