@@ -17,21 +17,43 @@ class Example(QWidget):
         self.initUI()
 
     def keyPressEvent(self, event):
+
         if event.key() == Qt.Key_PageUp:
             self.scale -= 1
             self.show_image()
         elif event.key() == Qt.Key_PageDown:
             self.scale += 1
             self.show_image()
+        if event.key() == Qt.Key_Up:
+            coord1, coord2 = self.coordinates.split(',')
+            coord1, coord2 = float(coord1), float(coord2)
+            self.coordinates = str(coord1) + ',' + str(coord2 + 0.01 * abs(23 - self.scale))
+            self.show_image()
+        if event.key() == Qt.Key_Down:
+            coord1, coord2 = self.coordinates.split(',')
+            coord1, coord2 = float(coord1), float(coord2)
+            self.coordinates = str(coord1) + ',' + str(coord2 - 0.1 ** abs(12 - self.scale))
+            self.show_image()
+        if event.key() == Qt.Key_Left:
+            coord1, coord2 = self.coordinates.split(',')
+            coord1, coord2 = float(coord1), float(coord2)
+            self.coordinates = str(coord1 - 0.01 * abs(23 - self.scale)) + ',' + str(coord2)
+            self.show_image()
+        if event.key() == Qt.Key_Right:
+            coord1, coord2 = self.coordinates.split(',')
+            coord1, coord2 = float(coord1), float(coord2)
+            self.coordinates = str(coord1 + 0.01 * abs(23 - self.scale)) + ',' + str(coord2)
+            self.show_image()
 
     def show_image(self):
-        getImage(self.scale)
+        getImage(self.scale, self.coordinates)
         self.map_file = 'map.png'
         self.pixmap = QPixmap(self.map_file)
         self.image.setPixmap(self.pixmap)
 
     def initUI(self):
         self.setGeometry(100, 100, *SCREEN_SIZE)
+        self.coordinates = '37.530887,55.70311'
         self.setWindowTitle('Отображение карты')
         self.image = QLabel(self)
         self.image.move(0, 0)
