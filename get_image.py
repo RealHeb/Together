@@ -13,10 +13,9 @@ def getImage(scale):
     response = requests.get(map_api_server, map_params)
 
     if not response:
-        return False
+        return
 
     map_file = "map.png"
     with open(map_file, "wb") as file:
         file.write(response.content)
-    return True
 

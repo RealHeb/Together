@@ -18,22 +18,20 @@ class Example(QWidget):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_PageUp:
-            self.action = 'up'
             self.scale -= 1
-            self.show_image()
+            if self.scale >= 0:
+                self.show_image()
+            else:
+                self.scale = 0
         elif event.key() == Qt.Key_PageDown:
-            self.action = 'down'
             self.scale += 1
-            self.show_image()
+            if self.scale <= 21:
+                self.show_image()
+            else:
+                self.scale = 21
 
     def show_image(self):
-        good_request = getImage(self.scale)
-        if not good_request:
-            if self.action == 'up':
-                self.scale += 1
-            else:
-                self.scale -= 1
-            return
+        getImage(self.scale)
         self.map_file = 'map.png'
         self.pixmap = QPixmap(self.map_file)
         self.image.setPixmap(self.pixmap)
